@@ -10,7 +10,11 @@ const productSchema = new mongoose.Schema({
     gravity: { type: Number, required: true },
     temperature: { type: Number, required: true },
     pH: { type: Number, required: true },
+    notes: { type: String },
+    fermStatus: { type: String, required: true },
+    packageStatus: { type: String, required: true },
     brewOrBlendDate: { type: Date, default: Date.now },
+    
 
 });
 
@@ -26,6 +30,9 @@ function validateProduct(product) {
         gravity: Joi.number().required(),
         temperature: Joi.number().required(),
         pH: Joi.number().required(),
+        fermStatus: Joi.string().required(),
+        packageStatus: Joi.string().required(),
+        notes: Joi.string(),
     });
     return schema.validate(product);
 }
