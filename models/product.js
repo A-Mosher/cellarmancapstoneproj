@@ -12,7 +12,7 @@ const productSchema = new mongoose.Schema({
     pH: { type: Number, required: true },
     notes: { type: String },
     fermStatus: { type: String, required: true },
-    packageStatus: { type: String, required: true },
+    packageStatus: { type: String, default: 'unpackaged' },
     brewOrBlendDate: { type: Date, default: Date.now },
     
 
@@ -31,7 +31,6 @@ function validateProduct(product) {
         temperature: Joi.number().required(),
         pH: Joi.number().required(),
         fermStatus: Joi.string().required(),
-        packageStatus: Joi.string().required(),
         notes: Joi.string(),
     });
     return schema.validate(product);

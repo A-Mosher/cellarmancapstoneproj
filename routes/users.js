@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post('/', async (req, res) => {
     try {
-        const { error } = validateUser(req.body);
+        const { error } = validateUser(req.body.user);
         if (error) return res.status(400).send(error.details[0].message);
 
         let user = await User.findOne({ email: req.body.email });
@@ -13,10 +13,10 @@ router.post('/', async (req, res) => {
 
         const salt = await bcrypt.genSalt(10);
         user = new User({
-            name: req.body.name,
-            email: req.body.email,
-            password: await bcrypt.hash(req.body.password, salt),
-            password2: await bcrypt.hash(req.body.password2, salt)
+            name: req.body.user.name,
+            email: req.body.user.email,
+            password: await bcrypt.hash(req.body.user.password, salt),
+            password2: await bcrypt.hash(req.body.user.password2, salt)
         });
 
         await user.save();

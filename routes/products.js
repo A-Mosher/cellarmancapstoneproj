@@ -42,7 +42,6 @@ router.post('/', async (req, res) => {
             temperature: req.body.temperature,
             pH: req.body.pH,
             fermStatus: req.body.fermStatus,
-            packageStatus: req.body.packageStatus,
             notes: req.body.notes,
         });
 
